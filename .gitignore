@@ -2,6 +2,10 @@
 /dist
 /node_modules
 /build
+/datadb
+/drizzle
+/pgadmin
+
 
 # TypeScript build cache
 *.tsbuildinfo
