@@ -6,7 +6,6 @@
 /drizzle
 /pgadmin
 
-
 # TypeScript build cache
 *.tsbuildinfo
 
