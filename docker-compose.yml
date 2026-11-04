@@ -1,0 +1,26 @@
+services:
+  harvest-db:
+    container_name: harvest_database
+    image: postgres:18-alpine
+    volumes:
+      - "./datadb:/var/lib/postgresql"
+    ports:
+      - ${DB_HARVEST_PORT}:5432
+    environment:
+      - POSTGRES_USER=${DB_HARVEST_USER}
+      - POSTGRES_PASSWORD=${DB_HARVEST_PASSWORD}
+      - POSTGRES_DB=${DB_HARVEST_NAME}
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_harves_ms
+    user: "root"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: phuenchullan.diaz@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+    ports:
+      - "8081:80"
+    volumes:
+      - "./pgadmin:/var/lib/pgadmin"
+    depends_on:
+      - harvest-db  

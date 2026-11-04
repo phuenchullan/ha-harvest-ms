@@ -12,21 +12,21 @@ function expandEnvReferences(value: string): string {
 }
 
 interface EnvVars {
-  HARVEST_PORT: number;
-  DATABASE_URL: string;
-  NATS_SERVERS: string[];
+  DB_HARVEST_PORT: number;
+  HARVEST_DATABASE_URL: string;
+  DB_NATS_SERVERS: string[];
 }
 
 const envsSchema = Joi.object({
-  HARVEST_PORT: Joi.number().required(),
-  DATABASE_URL: Joi.string().uri({ scheme: ['postgres', 'postgresql'] }).required(),
-  NATS_SERVERS: Joi.array().items( Joi.string() ).required(),
+  DB_HARVEST_PORT: Joi.number().required(),
+  HARVEST_DATABASE_URL: Joi.string().uri({ scheme: ['postgres', 'postgresql'] }).required(),
+  DB_NATS_SERVERS: Joi.array().items( Joi.string() ).required(),
 }).unknown(true);
 
 const { error, value } = envsSchema.validate({
   ...process.env,
-  DATABASE_URL: expandEnvReferences(process.env.DATABASE_URL ?? ''),
-  NATS_SERVERS: process.env.NATS_SERVERS?.split(','),
+  HARVEST_DATABASE_URL: expandEnvReferences(process.env.HARVEST_DATABASE_URL ?? ''),
+  DB_NATS_SERVERS: process.env.NATS_SERVERS?.split(','),
 });
 
 if (error) {
@@ -36,7 +36,7 @@ if (error) {
 const envVars: EnvVars = value;
 
 export const envs = {
-  port: envVars.HARVEST_PORT,
-  databaseUrl: envVars.DATABASE_URL,
-  natsServers: envVars.NATS_SERVERS,
+  port: envVars.DB_HARVEST_PORT,
+  databaseUrl: envVars.HARVEST_DATABASE_URL,
+  natsServers: envVars.DB_NATS_SERVERS,
 };
