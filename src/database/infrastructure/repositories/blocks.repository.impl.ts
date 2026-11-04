@@ -4,8 +4,8 @@ import { CreateBlockDto } from "../../../features/blocks/dto/create-block.dto.js
 import { UpdateBlockDto } from "../../../features/blocks/dto/update-block.dto.js";
 import { Block } from "../../domain/entities/block.js";
 import { BlocksDatasource } from "../../domain/datasource/blocks.datasource.js";
-import { PaginationDto } from "../../../common/dto/pagination.dto.js";
 import { ResponseDto } from "../../../common/dto/response.dto.js";
+import { BlockPaginationDto } from "../../../features/blocks/dto/block-pagination.dto.js";
 
 @Injectable()
 export class BlocksRepositoryImpl extends BlocksRepository {
@@ -20,7 +20,7 @@ export class BlocksRepositoryImpl extends BlocksRepository {
         return await this.blocksDatasource.findById(id);
     }
 
-    async findAll(paginationDto: PaginationDto): Promise<ResponseDto<Partial<Block>>> {
+    async findAll(paginationDto: BlockPaginationDto): Promise<ResponseDto<Partial<Block>>> {
         return await this.blocksDatasource.findAll(paginationDto);
     }
     

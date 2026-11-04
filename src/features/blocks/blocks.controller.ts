@@ -2,8 +2,8 @@ import { Controller } from '@nestjs/common';
 import { CreateBlockDto } from './dto/create-block.dto.js';
 import { BlocksService } from './blocks.service.js';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { PaginationDto } from '../../common/dto/pagination.dto.js';
 import { UpdateBlockDto } from './dto/update-block.dto.js';
+import { BlockPaginationDto } from './dto/block-pagination.dto.js';
 
 @Controller('blocks')
 export class BlocksController {
@@ -18,7 +18,7 @@ export class BlocksController {
     }
 
     @MessagePattern('blocks.findAll')
-    findAll(@Payload() paginationDto: PaginationDto){
+    findAll(@Payload() paginationDto: BlockPaginationDto){
         return this.blocksService.findAll(paginationDto);
     }
 

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsOptional, IsPositive, IsString, IsUUID } from "class-validator";
+import { IsBoolean, IsOptional, IsPositive, IsString, IsUUID } from "class-validator";
 
 
 export class CreatePlantationDto {
@@ -22,10 +22,15 @@ export class CreatePlantationDto {
 
     @IsOptional()
     @IsPositive()
-    @Type(() => Number)
-    phonePlantationId: number;
+    phonePlantationId?: number;
 
+    @IsOptional()
     @IsString()
-    phoneId: string;
+    phoneId?: string;
+
+    @IsOptional()
+    @IsBoolean()
+    @Type(() => Boolean)
+    isLoaded?: boolean;
 
 }

@@ -6,9 +6,9 @@ import { InjectDrizzle } from "@nestjs/drizzle";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { count, eq } from "drizzle-orm";
 import { RpcException } from "@nestjs/microservices";
-import { PaginationDto } from "../../../common/dto/pagination.dto.js";
 import { blocks } from "../../schemas/blocks.schema.js";
 import { ResponseDto } from "../../../common/dto/response.dto.js";
+import { BlockPaginationDto } from "../../../features/blocks/dto/block-pagination.dto.js";
 
 export class BlocksDatasourceImpl extends BlocksDatasource {
     
@@ -28,11 +28,12 @@ export class BlocksDatasourceImpl extends BlocksDatasource {
         }
     }
 
-    async findAll(paginationDto: PaginationDto): Promise<ResponseDto<Partial<Block>>> {
+    async findAll(paginationDto: BlockPaginationDto): Promise<ResponseDto<Partial<Block>>> {
         try {
-            const { page = 1, limit = 10 } = paginationDto;
-            const listBlocks = await this.db.select().from(blocks).offset((page - 1) * limit).limit(limit);
-            const [totalRecords] = await this.db.select({count: count()}).from(blocks);
+            const { page = 1, limit = 10, land } = paginationDto;
+            const landFilter = land ? eq(blocks.landId, land) : undefined;
+            const listBlocks = await this.db.select().from(blocks).where(landFilter).offset((page - 1) * limit).limit(limit);
+            const [totalRecords] = await this.db.select({count: count()}).from(blocks).where(landFilter);
             return {
                 meta: {
                     totalRecords: totalRecords.count,

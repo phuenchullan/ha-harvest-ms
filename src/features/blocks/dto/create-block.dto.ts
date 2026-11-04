@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsBoolean, IsPositive, IsString, IsUUID } from "class-validator";
+import { IsBoolean, IsOptional, IsPositive, IsString, IsUUID } from "class-validator";
 
 
 export class CreateBlockDto {
@@ -16,14 +16,17 @@ export class CreateBlockDto {
     @IsUUID()
     landId: string;
 
+    @IsOptional()
     @IsPositive()
-    phoneBlockId: number;
+    phoneBlockId?: number;
 
+    @IsOptional()
     @IsString()
-    phoneId: string;
+    phoneId?: string;
 
+    @IsOptional()
     @IsBoolean()
     @Type(() => Boolean)
-    isLoaded: boolean;
+    isLoaded?: boolean;
 
 }
