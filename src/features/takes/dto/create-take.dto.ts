@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 
 export class CreateTakeDto {
+  
   @IsUUID()
   trayId: string;
 
@@ -16,6 +17,9 @@ export class CreateTakeDto {
 
   @IsUUID()
   harvesterId: string;
+
+  @IsUUID()
+  userId: string;
 
   @IsPositive()
   @Type(() => Number)

@@ -25,7 +25,6 @@ export class HarvestersDatasourceImpl extends HarvestersDatasource {
             const [harvester] = await this.db.insert(harvesters).values(createHarvesterDto).returning();
             return harvester;
         } catch (error) {
-            console.log(error);
             throw new RpcException("Error al crear el cosechador.");
         }
     }

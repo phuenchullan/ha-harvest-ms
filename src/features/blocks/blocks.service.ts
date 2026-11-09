@@ -6,25 +6,25 @@ import { BlockPaginationDto } from './dto/block-pagination.dto.js';
 
 @Injectable()
 export class BlocksService {
+  constructor(private readonly blocksRepository: BlocksRepository) {}
 
-    constructor(
-        private readonly blocksRepository: BlocksRepository
-    ){}
+  findById(id: string) {
+    return this.blocksRepository.findById(id);
+  }
 
-    findById(id: string) {
-        return this.blocksRepository.findById(id);
-    }
+  findAll(paginationDto: BlockPaginationDto) {
+    return this.blocksRepository.findAll(paginationDto);
+  }
 
-    findAll(paginationDto: BlockPaginationDto) {
-        return this.blocksRepository.findAll(paginationDto);
-    }
+  getDataByActiveLand(activeLand: string) {
+    return this.blocksRepository.getDataByActiveLand(activeLand);
+  }
 
-    create(createBlockDto: CreateBlockDto) {
-        return this.blocksRepository.create(createBlockDto);
-    }
+  create(createBlockDto: CreateBlockDto) {
+    return this.blocksRepository.create(createBlockDto);
+  }
 
-    update(id: string, updateBlockDto: UpdateBlockDto) {
-        return this.blocksRepository.updateById(id, updateBlockDto);
-    }
-    
+  update(id: string, updateBlockDto: UpdateBlockDto) {
+    return this.blocksRepository.updateById(id, updateBlockDto);
+  }
 }

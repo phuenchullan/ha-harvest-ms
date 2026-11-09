@@ -1,8 +1,8 @@
 import { InjectDrizzle } from '@nestjs/drizzle';
 import { RpcException } from '@nestjs/microservices';
-import { count, eq } from 'drizzle-orm';
+import { and, count, desc, eq, gte, lte } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { PaginationDto } from '../../../common/dto/pagination.dto.js';
+import { TakePaginationDto } from '../../../features/takes/dto/take-pagination.dto.js';
 import { ResponseDto } from '../../../common/dto/response.dto.js';
 import { CreateTakeDto } from '../../../features/takes/dto/create-take.dto.js';
 import { UpdateTakeDto } from '../../../features/takes/dto/update-take.dto.js';
@@ -68,16 +68,27 @@ export class TakesDatasourceImpl extends TakesDatasource {
   }
 
   async findAll(
-    paginationDto: PaginationDto,
+    paginationDto: TakePaginationDto,
   ): Promise<ResponseDto<Partial<Take>>> {
     try {
-      const { page = 1, limit = 10 } = paginationDto;
+      const { page = 1, limit = 10, startDate, endDate } = paginationDto;
+      const dateFilter = and(
+        startDate
+          ? gte(takes.createdAt, new Date(`${startDate}T00:00:00.000Z`))
+          : undefined,
+        endDate
+          ? lte(takes.createdAt, new Date(`${endDate}T23:59:59.999Z`))
+          : undefined,
+      );
       const [totalRecords] = await this.db
         .select({ count: count() })
-        .from(takes);
+        .from(takes)
+        .where(dateFilter);
       const listTakes = await this.db
         .select()
         .from(takes)
+        .where(dateFilter)
+        .orderBy(desc(takes.createdAt))
         .offset((page - 1) * limit)
         .limit(limit);
 

@@ -20,6 +20,7 @@ export const takes = pgTable('takes', {
   harvesterId: uuid('harvesterId')
     .notNull()
     .references(() => harvesters.id),
+  userId: uuid('userId').default('1b5178b7-9dc5-42fe-8a6d-d6cd1eb186c2').notNull(),
   numberOfTray: integer('numberOfTray').notNull(),
   brute: doublePrecision('brute').notNull(),
   neto: doublePrecision('neto').notNull(),

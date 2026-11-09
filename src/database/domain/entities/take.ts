@@ -3,6 +3,7 @@ export class Take {
   trayId: string;
   plantationId?: string | null;
   harvesterId: string;
+  userId: string;
   numberOfTray: number;
   brute: number;
   neto: number;

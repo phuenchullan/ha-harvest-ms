@@ -6,6 +6,6 @@ import { DatabaseModule } from '../../database/database.module.js';
 @Module({
   imports: [DatabaseModule],
   controllers: [BlocksController],
-  providers: [BlocksService]
+  providers: [BlocksService],
 })
 export class BlocksModule {}
