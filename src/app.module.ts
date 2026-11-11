@@ -12,7 +12,7 @@ import { HarvestersModule } from './features/harvesters/harvesters.module.js';
     BlocksModule, 
     PlantationsModule, 
     TraysModule, 
-    TakesModule, 
+    // TakesModule, 
     HarvestersModule
   ],
 })

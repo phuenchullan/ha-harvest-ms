@@ -8,9 +8,6 @@ export const blocks = pgTable('blocks', {
     surface: doublePrecision('surface').notNull(), 
     unit: text('unit').notNull(),
     landId: uuid('landId').notNull().references(() => lands.id),
-    phoneBlockId: integer('phoneBlockId'),
-    phoneId: text('phoneId'),
-    isLoaded: boolean('isLoaded').notNull().default(false),
     createdAt: timestamp('createdAt').notNull().defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow().$onUpdate(() => new Date()).notNull(),
 });

@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsDateString,
   IsOptional,
   IsPositive,
   IsString,
@@ -10,20 +11,16 @@ import {
 export class CreateTakeDto {
   
   @IsUUID()
-  trayId: string;
+  plantationId: string;
 
   @IsUUID()
-  plantationId: string;
+  trayId: string;
 
   @IsUUID()
   harvesterId: string;
 
   @IsUUID()
   userId: string;
-
-  @IsPositive()
-  @Type(() => Number)
-  phoneTakeId: number;
 
   @IsPositive()
   @Type(() => Number)
@@ -41,11 +38,19 @@ export class CreateTakeDto {
   @Type(() => Number)
   price: number;
 
+  @IsPositive()
+  @Type(() => Number)
+  phoneTakeId: number;
+
   @IsString()
   phoneId: string;
+
+  @IsDateString()
+  takeDate: Date;
 
   @IsOptional()
   @IsBoolean()
   @Type(() => Boolean)
   isLoaded?: boolean;
+
 }

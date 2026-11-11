@@ -7,9 +7,9 @@ export class Plantation {
     unit: string;
     variety: string;
     blockId: string;
-    phonePlantationId?: number | null;
-    phoneId?: string | null;
     isLoaded?: boolean | null;
+    startDate: string | Date;
+    endDate?: string | Date | null;
     createdAt: string | Date;
     updatedAt: string | Date;
 }

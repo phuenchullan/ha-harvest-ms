@@ -6,7 +6,6 @@ export const trays = pgTable("trays", {
     description: text("description").notNull(),
     weight: doublePrecision("weight").notNull(),
     weightPerTray: doublePrecision("weightPerTray").notNull(),
-    isLoaded: boolean('isLoaded').notNull().default(false),
     createdAt: timestamp("createdAt").notNull().defaultNow(),
     updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
 });

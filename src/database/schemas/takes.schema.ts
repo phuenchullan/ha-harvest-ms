@@ -20,7 +20,7 @@ export const takes = pgTable('takes', {
   harvesterId: uuid('harvesterId')
     .notNull()
     .references(() => harvesters.id),
-  userId: uuid('userId').default('1b5178b7-9dc5-42fe-8a6d-d6cd1eb186c2').notNull(),
+  userId: uuid('userId').notNull(),
   numberOfTray: integer('numberOfTray').notNull(),
   brute: doublePrecision('brute').notNull(),
   neto: doublePrecision('neto').notNull(),
@@ -28,6 +28,7 @@ export const takes = pgTable('takes', {
   phoneTakeId: integer('phoneTakeId'),
   phoneId: text('phoneId'),
   isLoaded: boolean('isLoaded').notNull().default(false),
+  takeDate: timestamp('takeDate').notNull(),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt')
     .defaultNow()

@@ -6,7 +6,6 @@ export const lands = pgTable('lands',{
     name: text('name').notNull(),
     surface: doublePrecision('surface').notNull(), 
     unit: text('unit').notNull(),
-    isLoaded: boolean('isLoaded').notNull().default(false),
     createdAt: timestamp('createdAt').notNull().defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow().$onUpdate(() => new Date()).notNull(),
 });

@@ -8,7 +8,8 @@ import {
 } from 'class-validator';
 
 export class CreateBlockDto {
-  @IsString()
+
+ @IsString()
   name: string;
 
   @IsPositive()
@@ -20,16 +21,4 @@ export class CreateBlockDto {
   @IsUUID()
   landId: string;
 
-  @IsOptional()
-  @IsPositive()
-  phoneBlockId?: number;
-
-  @IsOptional()
-  @IsString()
-  phoneId?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  @Type(() => Boolean)
-  isLoaded?: boolean;
 }

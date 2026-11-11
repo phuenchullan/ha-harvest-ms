@@ -1,6 +1,6 @@
 import { PartialType } from "@nestjs/mapped-types";
 import { CreatePlantationDto } from "./create-plantation.dto.js";
-import { IsBoolean, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsOptional, IsUUID } from "class-validator";
 import { Type } from "class-transformer";
 
 
@@ -8,12 +8,12 @@ import { Type } from "class-transformer";
 export class UpdatePlantationDto extends PartialType(CreatePlantationDto){
 
     @IsOptional()
-    @IsString()
+    @IsUUID()
     id?: string;
 
     @IsOptional()
-    @Type(() => Boolean)
     @IsBoolean()
-    isLoaded?: boolean;
+    @Type(() => Boolean)
+    active?: boolean;
     
 }

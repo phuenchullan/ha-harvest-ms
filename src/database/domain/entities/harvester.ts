@@ -1,7 +1,7 @@
 
 
 export class Harvester {
-
+    
     id: string;
     rut: number;
     dv: string;

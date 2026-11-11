@@ -1,6 +1,5 @@
-import { Type } from 'class-transformer';
 import {
-  IsBoolean,
+  IsDateString,
   IsOptional,
   IsPositive,
   IsString,
@@ -8,6 +7,7 @@ import {
 } from 'class-validator';
 
 export class CreatePlantationDto {
+
   @IsString()
   fruit: string;
 
@@ -23,16 +23,11 @@ export class CreatePlantationDto {
   @IsUUID()
   blockId: string;
 
-  @IsOptional()
-  @IsPositive()
-  phonePlantationId?: number;
+  @IsDateString()
+  startDate: Date;
 
   @IsOptional()
-  @IsString()
-  phoneId?: string;
+  @IsDateString()
+  endDate?: Date | null;
 
-  @IsOptional()
-  @IsBoolean()
-  @Type(() => Boolean)
-  isLoaded?: boolean;
 }

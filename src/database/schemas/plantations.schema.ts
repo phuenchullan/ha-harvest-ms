@@ -8,9 +8,9 @@ export const plantations = pgTable("plantations", {
     unit: text("unit").notNull(),
     variety: text("variety").notNull(),
     blockId: uuid("blockId").notNull().references(() => blocks.id),
-    phonePlantationId: integer('phonePlantationId'),
-    phoneId: text('phoneId'),
-    isLoaded: boolean('isLoaded').notNull().default(false),
+    active: boolean('active').notNull().default(true),
+    startDate: timestamp('startDate').notNull(),
+    endDate: timestamp('endDate'),
     createdAt: timestamp('createdAt').notNull().defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow().$onUpdate(() => new Date()).notNull(),
 });
