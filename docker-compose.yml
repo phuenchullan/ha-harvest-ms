@@ -3,7 +3,7 @@ services:
     container_name: harvest_database
     image: postgres:18-alpine
     volumes:
-      - "./datadb:/var/lib/postgresql"
+      - "./data/ha-harvest-ms:/var/lib/postgresql"
     ports:
       - ${DB_HARVEST_PORT}:5432
     environment:
